@@ -9,13 +9,13 @@ pipeline {
     stage('Checkout') {
       steps {
         sh 'echo passed'
-        //git branch: 'main', url: 'https://github.com/Abhishek123-Burman/jenkins-argocd.git'
+        
       }
     }
     stage('Build and Test') {
       steps {
-        withMaven(maven: 'mvn') {
-            sh "mvn clean package"
+        container ('maven'){
+                  sh 'mvn version'
         }    
       }
     }
