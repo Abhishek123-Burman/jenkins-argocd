@@ -14,9 +14,8 @@ pipeline {
     }
     stage('Build and Test') {
       steps {
-        sh 'ls -ltr'
-        // build the project and create a JAR filegit update-index --no-assume-unchanged path/to/file
-        sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn clean package'
+        def mvnHome = tool name: 'Apache Maven 3.6.0', type: 'maven'
+        sh "${mvnHome}/bin/mvn -B -DskipTests clean package"
       }
     }
     stage('Static Code Analysis') {
